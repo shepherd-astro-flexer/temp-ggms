@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(express.static(path.resolve(__dirname, "./public")));
+app.use(express.static(path.resolve(__dirname, "./ggms/dist")));
 app.use(cookieParser())
 app.use(express.json());
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
@@ -49,7 +49,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/attendance", attendanceRouter)
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./public", "index.html"))
+  res.sendFile(path.resolve(__dirname, "./ggms/dist", "index.html"))
 })
 
 // not found middleware
@@ -63,7 +63,7 @@ try {
   await mongoose.connect(process.env.MONGO_URL)
   const port = process.env.PORT || 5200;
   app.listen(port, () => {
-    console.log(`Server listening on port ${port}.`);
+    console.log(`Server listening on port ${port}.`); 
   });
 } catch (error) {
     console.log(error);

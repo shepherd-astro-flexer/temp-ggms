@@ -2,7 +2,7 @@ import { useNavigate, useLocation, useLoaderData, Form, useSubmit } from "react-
 import { currentDate, customFetch, debounce } from "../utils";
 import { toast } from "react-toastify";
 import ClientsPagination from "./ClientsPagination";
-import FormPagination from "./FormPagination";
+// import FormPagination from "./FormPagination";
 
 export const action = async ({request}) => {
   const formData = await request.formData();
@@ -74,7 +74,7 @@ const AttendanceForm = () => {
           })}
         </div>
       </div>
-      <FormPagination/>
+      <ClientsPagination attendance />
     </div>
   )
 }

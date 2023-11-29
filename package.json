@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "setup-project": "npm i && cd ggms && npm i",
+    "setup-production-app": "npm i && cd ggms && npm i && npm run build",
     "server": "nodemon server",
     "client": "cd ggms && npm run dev",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
