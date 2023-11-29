@@ -2,6 +2,7 @@ import { useNavigate, useLocation, useLoaderData, Form, useSubmit } from "react-
 import { currentDate, customFetch, debounce } from "../utils";
 import { toast } from "react-toastify";
 import ClientsPagination from "./ClientsPagination";
+import { useNavigation } from "react-router-dom/dist/umd/react-router-dom.development";
 // import FormPagination from "./FormPagination";
 
 export const action = async ({request}) => {
@@ -24,16 +25,10 @@ export const action = async ({request}) => {
 const AttendanceForm = () => {
   const {clients, attendees, query: {createdDate, search: searchName}} = useLoaderData();
   const submit = useSubmit();
-  const navigate = useNavigate();
-  const {pathname, search} = useLocation();
-
-  // const changeDate = (e) => {
-  //   navigate(`${pathname}?createdDate=${e.target.value}`);
-  // }
-
-  // const searchNames = (e) => {
-  //   submit(e)
-  // }
+  // const navigate = useNavigate();
+  // const {pathname, search} = useLocation();
+  const navigation = useNavigation();
+  const submitting = navigation.state === "submitting";
   
   return (
     <div className="bg-base-200 p-8 rounded-md">
@@ -67,7 +62,7 @@ const AttendanceForm = () => {
                   <input type="hidden" name="name" value={name}/>
                   <input type="hidden" name="lastName" value={lastName}/>
                   <input type="hidden" name="clientId" value={_id}/>
-                  <button className="btn btn-xs btn-primary btn-outline capitalize w-full" type="submit" disabled={attendeeExist}>
+                  <button className="btn btn-xs btn-primary btn-outline capitalize w-full" type="submit" disabled={attendeeExist || submitting}>
                   {name} {lastName}
                   </button>
               </Form>
