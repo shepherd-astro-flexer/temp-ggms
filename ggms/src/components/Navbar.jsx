@@ -1,16 +1,13 @@
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
-import { NavLink, useLoaderData } from "react-router-dom";
-import NavLinks from "./NavLinks";
-import { useDispatch, useSelector } from "react-redux";
+import { useLoaderData } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 import {FaDumbbell} from "react-icons/fa6";
 import ouch from "../assets/images/ouch-w.png"
 import { toggleSidebar } from "../features/user/userSlice";
-import {FaUserCircle} from "react-icons/fa"
 
 const Navbar = () => {
-  const {prices} = useSelector((store) => store.cart)
   const {avatar} = useLoaderData();
 
   const dispatch = useDispatch()

@@ -1,10 +1,9 @@
 import { StatusCodes } from "http-status-codes"
 import cloudinary from "cloudinary";
-import { promises as fs} from "fs";
 // * local imports
 import User from "../models/UserModel.js"
-
 import Client from "../models/ClientModel.js"
+import { formatImage } from "../middleware/multerMiddleware.js";
 
 export const getCurrentUser = async(req, res) => {
     const user = await User.findOne({_id: req.user.userId})
@@ -27,9 +26,9 @@ export const updateUser = async (req, res) => {
     
     delete obj.password;
     if (req.file) {
-        const response = await cloudinary.v2.uploader.upload(req.file.path);
+        const file = formatImage(req.file);
+        const response = await cloudinary.v2.uploader.upload(file);
         // so once mailagay na natin yung file sa public/upload
-        await fs.unlink(req.file.path);
         // this is the url directed to the image that is uploaded
         obj.avatar = response.secure_url;
         // we are going to use this avatarPublicId to perform CRUD operations on the cloudinary
