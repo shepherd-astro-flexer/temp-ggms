@@ -25,6 +25,7 @@ export const action = async ({request}) => {
 const AttendanceForm = () => {
   const {clients, attendees, query: {createdDate, search: searchName}} = useLoaderData();
   const submit = useSubmit();
+  // * used useSubmit hook for a different approach :D
   // const navigate = useNavigate();
   // const {pathname, search} = useLocation();
   const navigation = useNavigation();

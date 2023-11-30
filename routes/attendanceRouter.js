@@ -1,9 +1,9 @@
 import express from "express";
 
 // local imports
-import Attendance from "../models/AttendanceModel.js";
-import { BadRequestError } from "../errors/customErrors.js";
+import { addAttendee, deleteAttendee } from "../controllers/attendanceControllers.js";
 import { validateAttendance } from "../middleware/validationMiddleware.js";
+import { checkTestUser } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -11,23 +11,8 @@ router.route("/")
 .get((req, res) => {
     res.json(req.body);
 })
-.post(validateAttendance, async (req, res) => {
-    // const {createdDate, name, lastName, clientId} = req.body;
+.post(checkTestUser ,validateAttendance, addAttendee)
 
-    try {
-        const attendee = await Attendance.create(req.body);
-        console.log(attendee);
-        res.status(201).json(attendee);
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.route("/:id")
-.delete(async (req, res) => {
-    console.log(req.params.id);
-    await Attendance.deleteOne({_id: req.params.id})
-    res.status(200).json({msg: "successfully deleted attendee"})
-})
+router.delete("/:id", checkTestUser, deleteAttendee)
 
 export default router;

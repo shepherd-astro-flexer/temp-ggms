@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../features/user/userSlice";
 import {FaDumbbell} from "react-icons/fa6";
-import gilas from "../assets/images/gilas-white.png"
+import ouch from "../assets/images/ouch-w.png"
 import { toggleSidebar } from "../features/user/userSlice";
 import {FaUserCircle} from "react-icons/fa"
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             <div className="w-8 rounded-full">
               <img src={avatar} alt="avatar" />
             </div>
-          </div> : <FaUserCircle className="w-8 h-8"/>}
+          </div> : <img src={ouch} className="h-8 w-8"/>}
         </div>
       </div>
     </nav>

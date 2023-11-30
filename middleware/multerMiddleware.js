@@ -2,7 +2,7 @@ import multer from "multer";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "public/uploads")
+        cb(null, "ggms/dist/uploads")
     },
     filename: (req, file, cb) => {
         const fileName = file.originalname

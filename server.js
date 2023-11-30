@@ -46,7 +46,7 @@ app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/clients", authenticateUser, clientRouter);
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/attendance", attendanceRouter)
+app.use("/api/v1/attendance", authenticateUser, attendanceRouter)
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./ggms/dist", "index.html"))

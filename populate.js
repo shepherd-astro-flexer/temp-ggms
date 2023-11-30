@@ -17,7 +17,7 @@ try {
     })
 
     await Client.deleteMany({createdBy: user._id})
-    await Client.create(clients)
+    // await Client.create(clients)
 
     console.log("Success!!!");
     process.exit(0);
