@@ -1,4 +1,4 @@
-import { ForbiddenError, UnauthorizedError } from "../errors/customErrors.js";
+import { BadRequestError, ForbiddenError, UnauthorizedError } from "../errors/customErrors.js";
 import { verifyJWT } from "../utils/token.js";
 
 export const authenticateUser = (req, res, next) => {
@@ -17,13 +17,13 @@ export const authenticateUser = (req, res, next) => {
         req.user = {userId, role, isTestUser};
         next();
     } catch (error) {
-        throw new ForbiddenError("invalid token")
+        throw new UnauthorizedError("invalid token")
     }
 }
 
 export const checkTestUser = (req, res, next) => {
     if (req.user.isTestUser) {
-        throw new ForbiddenError("Demo User. Read Only")
+        throw new BadRequestError("Demo User. Read Only")
     }
 
     next()

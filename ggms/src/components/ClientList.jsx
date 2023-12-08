@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router-dom"
 import ClientCard from "./ClientCard"
+import { useSelector } from "react-redux";
 
 const ClientList = () => {
-  const {totalJobs, clients} = useLoaderData()
-  
+  const {data} = useSelector((store) => store.client);
+  const {totalJobs, clients} = data;
+
   if (clients.length < 1) {
     return <div className="mt-16">
       <h1 className="text-2xl tracking-wider md:text-3xl lg:text-4xl xl:text-5xl">No clients to display...</h1>

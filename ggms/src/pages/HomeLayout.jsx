@@ -6,29 +6,41 @@ import { updateTotalAmount } from "../features/cart/cartSlice";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../features/user/userSlice";
+import { nanoid } from "nanoid";
+import {useQuery, useQueryClient} from "@tanstack/react-query"
 
-export const loader = (store) => async () => {
-  try {
+const userQuery = {
+  queryKey: ["user"],
+  queryFn: async () => {
     const {data} = await customFetch.get("/users/current-user");
-    // const data = await queryClient.ensureQueryData(fetchFeaturedQuery());
-    store.dispatch(getCurrentUser(data));
+    return data;
+  }
+}
+
+export const loader = (store, queryClient) => async () => {
+  // ! make sure that you passed in the queryClient on the  and you defined the parameter
+  try {
+    const data = await queryClient.ensureQueryData(userQuery);
+    // queryClient.invalidateQueries();
+    // store.dispatch(getCurrentUser(data));
+    
     return data;
   } catch (error) {
-    toast.warn("You must be logged in")
+    toast.warn("You must be logged in");
     return redirect("/login");
   }
 }
 
 const HomeLayout = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  const {data} = useQuery(userQuery);
+  
   const isLoading = navigation.state === "loading";
-  const { cartItems } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    dispatch(updateTotalAmount());
-  }, [cartItems]);
+    dispatch(getCurrentUser(data));
+  }, [data]);
 
   return (
     <div className="flex">
@@ -41,7 +53,7 @@ const HomeLayout = () => {
           <Loading />
         ) : (
           <section className="align-element py-20 h-screen">
-            <Outlet />
+            <Outlet context={data}/>
           </section>
         )}
       </div>

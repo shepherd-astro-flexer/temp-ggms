@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tanstack/react-query": "^5.10.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.37.3",
     "concurrently": "^8.0.1",
@@ -36,6 +37,5 @@
     "multer": "^1.4.5-lts.1",
     "nanoid": "^4.0.2",
     "nodemon": "^2.0.22"
-  },
-  "devDependencies": {}
+  }
 }

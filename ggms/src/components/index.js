@@ -27,6 +27,8 @@ export {default as FileInput} from "./FileInput"
 export {default as AttendanceList} from "./AttendanceList"
 export {default as AttendanceForm} from "./AttendanceForm"
 export {default as ClientsPagination} from "./ClientsPagination"
+export {default as LoginButton} from "./LoginButton"
+
 
 
 

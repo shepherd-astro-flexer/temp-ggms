@@ -3,11 +3,14 @@ import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import SubmitBtn from "./SubmitBtn";
 import FormInput from "./FormInput";
 import { SORT_BY } from "../../../utils/constants";
+import { useSelector } from "react-redux";
 
 const SearchForm = () => {
-    const navigate = useNavigate();
-    const {query: {search, sort}} = useLoaderData();
-    
+  const navigate = useNavigate();
+  // const {query: {search, sort}} = useLoaderData();
+  const {data} = useSelector((store) => store.client);
+  const {query: {search, sort}} = data;
+
   return (
     <Form className="bg-base-200 p-8 rounded-md">
       <h1 className="capitalize text-sm mb-2 md:text-md lg:lg xl:text-xl">search form</h1>
@@ -28,4 +31,5 @@ const SearchForm = () => {
     </Form>
   )
 }
+
 export default SearchForm

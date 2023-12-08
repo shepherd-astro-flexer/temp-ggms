@@ -1,16 +1,26 @@
 import { Form, Link, redirect, useNavigate } from "react-router-dom";
-import { FormInput, SubmitBtn } from "../components";
+import { FormInput, LoginButton, SubmitBtn } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import gilasWhite from "../assets/images/gilas-white.png";
 import {FiLogIn} from "react-icons/fi"; 
 
-export const action = (store) => async ({request}) => {
+// const loginQuery = (postData) => {
+//   return {
+//     queryKey: ["login"],
+//     queryFn: async () => {
+//       const {data} = await customFetch.post("/auth/login", postData);
+//       return data;
+//     }
+//   }
+// }
+
+export const action = (store, queryClient) => async ({request}) => {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
   try {
-    const formData = await request.formData();
-    const data = Object.fromEntries(formData);
     await customFetch.post("/auth/login", data);
-    
+    queryClient.invalidateQueries();
     toast.success("Logged in successfully")
     return redirect("/")
   } catch (error) {
@@ -59,6 +69,10 @@ const Login = () => {
         <div className="mt4">
           <SubmitBtn text="login" icon={<FiLogIn/>}/>
         </div>
+        
+          {/* <LoginButton /> */}
+          {/* <button className="btn btn-block btn-primary" type="button">login using auth 0</button> */}
+        
         <button onClick={loginGuestUser} type="button" className="btn btn-secondary btn-block">
           guest user
         </button>

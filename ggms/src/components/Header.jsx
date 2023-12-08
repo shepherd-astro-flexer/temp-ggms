@@ -1,19 +1,40 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logoutUser } from "../features/user/userSlice";
+import { Link, useNavigate} from "react-router-dom";
 import { customFetch } from "../utils";
+import { logoutUser } from "../features/user/userSlice";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isAuthError, setisAuthError] = useState(false)
   const user = useSelector((store) => store.user.user);
+  
+  const queryClient = useQueryClient();
 
   const logout = async() => { 
     navigate("/login");
     dispatch(logoutUser());
-
-    await customFetch.get("/auth/logout")
+    await customFetch.get("/auth/logout");
+    queryClient.invalidateQueries();
   };
+
+  customFetch.interceptors.response.use((response) => {
+    return response;
+  }, (error) => {
+    if (error?.response?.status === 401) {
+      setIsAuthenticated(true);
+    }
+
+    return Promise.reject(error);
+  })
+
+  useEffect(() => {
+    if (!isAuthError) return
+    
+    logout();
+  }, [isAuthError])
 
   return (
     <header className="bg-neutral py-2 text-neutral-content">

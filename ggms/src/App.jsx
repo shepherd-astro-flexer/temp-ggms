@@ -22,7 +22,7 @@ import { ErrorElement } from "./components";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-
+import {Auth0Provider} from "@auth0/auth0-react"
 // loaders
 // import { loader as landingLoader } from "./pages/Landing";
 import { loader as clientsLoader } from "./pages/Clients";
@@ -35,8 +35,8 @@ import { loader as checkoutLoader } from "./pages/Checkout";
 import { loader as ordersLoader } from "./pages/Orders";
 import { loader as editClientLoader } from "./pages/EditClient";
 import { loader as appStatsLoader } from "./pages/AppStats";
-import { loader as profileLoader } from "./pages/Profile";
 import { loader as attendanceLoader } from "./pages/Attendance";
+// import { loader as profileLoader } from "./pages/Profile";
 
 // actions
 import { action as loginAction } from "./pages/Login";
@@ -63,19 +63,20 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
-    loader: homeLoader(store),
+    loader: homeLoader(store, queryClient),
     errorElement: <Error />,
     children: [
       {
         index: true,
         element: <Landing />,
         errorElement: <ErrorElement />,
-        action: landingAction,
+        action: landingAction(queryClient),
       },
       {
         path: "all-clients",
         element: <Clients />,
-        loader: clientsLoader,
+        loader: clientsLoader(queryClient),
+        errorElement: <ErrorElement />
         // action: clientAction
       },
       {
@@ -90,7 +91,6 @@ const router = createBrowserRouter([
         element: <SingleProduct />,
         errorElement: <ErrorElement />,
         loader: singleProductLoader(queryClient),
-       
       },
       {
         path: "cart",
@@ -112,28 +112,30 @@ const router = createBrowserRouter([
       {
         path: "edit-client/:id",
         element: <EditClient />,
-        loader: editClientLoader,
-        action: editFormClientAction
+        loader: editClientLoader(queryClient),
+        action: editFormClientAction(queryClient),
+        errorElement: <ErrorElement />
       },
       {
         path: "delete-job/:id",
-        action: deleteClientAction
+        action: deleteClientAction(queryClient)
       },
       {
         path: "admin",
         element: <AppStats/>,
-        loader: appStatsLoader
+        loader: appStatsLoader,
+        errorElement: <ErrorElement />
       },
       {
         path: "profile",
         element: <Profile />,
-        loader: profileLoader,
-        action: profileAction
+        action: profileAction(queryClient),
+        errorElement: <ErrorElement />
       },
       {
         path: "attendance",
         element: <Attendance />,
-        loader: attendanceLoader,
+        loader: attendanceLoader(queryClient),
         action: attendanceAction, 
         errorElement: <ErrorElement/>
       }
@@ -141,7 +143,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    action: loginAction(store),
+    action: loginAction(store, queryClient),
     element: <Login />,
     errorElement: <Error />,
   },
@@ -155,6 +157,13 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
+    <Auth0Provider
+    domain="dev-rrhk56w6pey8yvjl.us.auth0.com"
+    clientId="CJVAnk6S7dBMJAYgBzZDDdOtmvNOhZDI"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
@@ -162,6 +171,7 @@ const App = () => {
         <ToastContainer position="top-center"/>
       </QueryClientProvider>
     </Provider>
+    </Auth0Provider>
   );
 };
 export default App;

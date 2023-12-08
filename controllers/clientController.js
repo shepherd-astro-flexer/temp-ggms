@@ -2,6 +2,7 @@
 import { StatusCodes } from "http-status-codes";
 import Client from "../models/ClientModel.js";
 import Attendance from "../models/AttendanceModel.js";
+// import { currentDate } from "../ggms/src/utils/index.js";
 
 export const createClient = async (req, res) => {
     const {name, lastName} = req.body
@@ -22,6 +23,10 @@ export const searchClient = async (req, res) => {
     // ? how do we sort the data?
     // ? checking for multiple filters?
     console.log(req.query);
+    // if (!req.query.createdDate) {
+    //     req.query.createdDate = currentDate();
+    // }
+
     const attendees = await Attendance.find({createdDate});
     const filterObject = {
         createdBy: isTestUser ? userId : {$ne: "654fc7c716101ce1b45138b8"}

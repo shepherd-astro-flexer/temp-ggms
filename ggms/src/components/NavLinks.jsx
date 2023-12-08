@@ -20,7 +20,8 @@ const links = [
 
 const NavLinks = ({big}) => {
   const dispatch = useDispatch()
-  const user = useSelector((store) => store.user.user)
+  const role = useSelector((store) => store?.user?.user?.role)
+  
   const {pathname} = useLocation()
   const {isSidebarOpen} = useSelector(store => store.user)
  
@@ -29,7 +30,7 @@ const NavLinks = ({big}) => {
       {links.map((link) => {
         const { id, path, text, icon } = link;
 
-        if (user.role !== "admin" && text === "admin") {
+        if (role !== "admin" && text === "admin") {
           return
         }
 

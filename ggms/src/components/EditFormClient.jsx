@@ -7,13 +7,14 @@ import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import DateInput from "./DateInput";
 
-export const action = async ({params, request}) => {
+export const action = (queryClient) => async ({params, request}) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   
   try {
     // ! we are going for the patch request because that is what the server is requesting 
     await customFetch.patch(`/clients/${params.id}`, data);
+    queryClient.invalidateQueries(["clients"])
     toast.success("Edited client successfully");
     return redirect("/all-clients");
   } catch (error) {
@@ -23,8 +24,8 @@ export const action = async ({params, request}) => {
   }
 }
 
-const FormClient = ({title}) => {
-  const {name, lastName, email, sex, birthdate} = useLoaderData();
+const FormClient = ({title, data}) => {
+  const {name, lastName, email, sex, birthdate} = data;
   console.log(birthdate);
   return (
     <Form method="POST" className="bg-base-200 p-8 rounded-md">
