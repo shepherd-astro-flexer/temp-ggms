@@ -7,7 +7,8 @@ import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../features/user/userSlice";
 import { nanoid } from "nanoid";
-import {useQuery, useQueryClient} from "@tanstack/react-query"
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const userQuery = {
   queryKey: ["user"],
@@ -37,7 +38,7 @@ const HomeLayout = () => {
   
   const isLoading = navigation.state === "loading";
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     dispatch(getCurrentUser(data));
   }, [data]);

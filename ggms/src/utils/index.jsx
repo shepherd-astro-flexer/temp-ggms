@@ -38,12 +38,12 @@ export const debounce = (func, timeout) => {
     // ! this is the function that gets passed in on the event handler
     return (e) => {
         clearTimeout(timeoutId);
-        const form = e.currentTarget.form;
-        console.log(timeoutId);
+        const formData = e.currentTarget.form;
+        
         // ? scope scope?
-        timeoutId = setTimeout((formData) => {
+        timeoutId = setTimeout(() => {
             func(formData);
-        }, timeout, form)
+        }, timeout)
     }
 }
 

@@ -73,9 +73,9 @@ const Login = () => {
           {/* <LoginButton /> */}
           {/* <button className="btn btn-block btn-primary" type="button">login using auth 0</button> */}
         
-        <button onClick={loginGuestUser} type="button" className="btn btn-secondary btn-block">
+        {/* <button onClick={loginGuestUser} type="button" className="btn btn-secondary btn-block">
           guest user
-        </button>
+        </button> */}
         <p className="text-center">
           Not a member yet?{" "}
           <Link

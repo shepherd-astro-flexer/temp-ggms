@@ -11,6 +11,7 @@ const Header = () => {
   const [isAuthError, setisAuthError] = useState(false)
   const user = useSelector((store) => store.user.user);
   
+
   const queryClient = useQueryClient();
 
   const logout = async() => { 
@@ -19,12 +20,12 @@ const Header = () => {
     await customFetch.get("/auth/logout");
     queryClient.invalidateQueries();
   };
-
+  // * Interceptors
   customFetch.interceptors.response.use((response) => {
     return response;
   }, (error) => {
     if (error?.response?.status === 401) {
-      setIsAuthenticated(true);
+      setisAuthError(true);
     }
 
     return Promise.reject(error);
@@ -35,6 +36,8 @@ const Header = () => {
     
     logout();
   }, [isAuthError])
+
+
 
   return (
     <header className="bg-neutral py-2 text-neutral-content">

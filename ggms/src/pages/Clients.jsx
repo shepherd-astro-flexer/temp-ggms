@@ -24,25 +24,18 @@ export const loader = (queryClient) => async ({request}) => {
   const url = new URL(request.url).searchParams;
   const params = Object.fromEntries(url);
   
-  const data = await queryClient.ensureQueryData(allClientQuery(params));
+  await queryClient.ensureQueryData(allClientQuery(params));
   // queryClient.invalidateQueries(["clients"]);
-  return {params, ...data}
+  return {searchParams: params, queryFunc: allClientQuery};
 }
 
 const Clients = () => {
-  const {params} = useLoaderData();
-  const {data} = useQuery(allClientQuery(params));
-  const dispatch = useDispatch()
-  console.log(data);
-  useEffect(() => {
-    dispatch(getData(data))
-  }, [data])
-
+  
   return (
     <>
       <SearchForm />
       <ClientList />
-      <ClientsPagination />
+      <ClientsPagination /> 
     </>
   )
 }

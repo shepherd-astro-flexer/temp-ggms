@@ -1,9 +1,12 @@
 import { useLoaderData } from "react-router-dom";
 import AttendeeCard from "./AttendeeCard";
+import { useQuery } from "@tanstack/react-query";
 
 const AttendanceList = () => {
-  const {attendees} = useLoaderData();
-    
+  const {searchParams, queryFunc} = useLoaderData();
+  const {data} = useQuery(queryFunc(searchParams));
+  const {attendees, } = data;
+   
   if (attendees.length < 1) {
     return <div className="mt-16">
     <h1 className="text-2xl tracking-wider md:text-3xl lg:text-4xl xl:text-5xl">No attendees to display...</h1>

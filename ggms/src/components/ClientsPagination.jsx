@@ -1,23 +1,25 @@
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom"
 import { paginationTest } from "../utils";
 import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
 const ClientsPagination = ({attendance}) => {
-  const {data} = useSelector((store) => store.client);
-   const {numberOfPages, currentPage} = data;
-   console.log(numberOfPages);
-   const navigate = useNavigate();
-   const {pathname, search} = useLocation();
+  // const {data} = useSelector((store) => store.client);
+  //  console.log(data);
+  const {searchParams, queryFunc} = useLoaderData();
+  const {data} = useQuery(queryFunc(searchParams))
+  const {numberOfPages, currentPage} = data;
+  const navigate = useNavigate();
+  const {pathname, search} = useLocation();
 
   const navigatePages = (page) => {
     // * this will extract the search params from the url
-     const newURL = new URLSearchParams(search);
-     newURL.set("page", page)
-     navigate(`${pathname}?${newURL.toString()}`);
-   }
+    const newURL = new URLSearchParams(search);
+    newURL.set("page", page)
+    navigate(`${pathname}?${newURL.toString()}`);
+  }
   
   const renderPagination = paginationTest(numberOfPages, currentPage);
-  
   if (numberOfPages < 2) {
     return null
   }

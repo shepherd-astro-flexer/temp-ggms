@@ -136,7 +136,7 @@ const router = createBrowserRouter([
         path: "attendance",
         element: <Attendance />,
         loader: attendanceLoader(queryClient),
-        action: attendanceAction, 
+        action: attendanceAction(queryClient), 
         errorElement: <ErrorElement/>
       }
     ],

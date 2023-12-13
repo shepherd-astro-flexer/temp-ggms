@@ -3,9 +3,11 @@ import { currentDate, customFetch, debounce } from "../utils";
 import { toast } from "react-toastify";
 import ClientsPagination from "./ClientsPagination";
 import { useNavigation } from "react-router-dom/dist/umd/react-router-dom.development";
+import { useQuery } from "@tanstack/react-query";
+
 // import FormPagination from "./FormPagination";
 
-export const action = async ({request}) => {
+export const action = (queryClient) => async ({request}) => {
   const formData = await request.formData();
   let data = Object.fromEntries(formData);
   const url = new URL(request.url);
@@ -13,6 +15,7 @@ export const action = async ({request}) => {
   data.createdDate = searchParams.createdDate || currentDate();
  try {
   const {data: client} = await customFetch.post("/attendance/", data);
+  queryClient.invalidateQueries(["attendance"])
   const clientName = client.name.charAt(0).toUpperCase() + client.name.slice(1);
   toast.success(`Successfully added ${clientName} on the list`);
   return null
@@ -23,15 +26,18 @@ export const action = async ({request}) => {
 }
 
 const AttendanceForm = () => {
-  const {clients, attendees, query: {createdDate, search: searchName}} = useLoaderData();
+  // ! hindi lang naman sa main page pwede gamitin yung useQuery, right?
+  const {searchParams, queryFunc} = useLoaderData();
+  const {data} = useQuery(queryFunc(searchParams));
+  const {clients, attendees, query: {createdDate, search : searchName}} = data;
+  
   const submit = useSubmit();
   // * used useSubmit hook for a different approach :D
   // const navigate = useNavigate();
   // const {pathname, search} = useLocation();
-  console.log(createdDate);
   const navigation = useNavigation();
   const submitting = navigation.state === "submitting";
-  
+
   return (
     <div className="bg-base-200 p-8 rounded-md">
       <h1 className="text-3xl capitalize">attendance form</h1>

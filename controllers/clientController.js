@@ -22,7 +22,6 @@ export const searchClient = async (req, res) => {
     const {isTestUser, userId} = req.user;
     // ? how do we sort the data?
     // ? checking for multiple filters?
-    console.log(req.query);
     // if (!req.query.createdDate) {
     //     req.query.createdDate = currentDate();
     // }
@@ -67,6 +66,7 @@ export const searchClient = async (req, res) => {
     const totalJobs = await Client.countDocuments(filterObject);
     
     const numberOfPages = Math.ceil(totalJobs / 10); 
+    console.log(req.query);
 
     res.status(StatusCodes.OK).json({currentPage: page, numberOfPages, totalJobs, clients, attendees, query: req.query});
 }
