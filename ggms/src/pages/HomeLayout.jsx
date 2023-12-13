@@ -21,11 +21,11 @@ const userQuery = {
 export const loader = (store, queryClient) => async () => {
   // ! make sure that you passed in the queryClient on the  and you defined the parameter
   try {
-    const data = await queryClient.ensureQueryData(userQuery);
+    await queryClient.ensureQueryData(userQuery);
     // queryClient.invalidateQueries();
     // store.dispatch(getCurrentUser(data));
     
-    return data;
+    return {userQuery};
   } catch (error) {
     toast.warn("You must be logged in");
     return redirect("/login");
@@ -35,14 +35,13 @@ export const loader = (store, queryClient) => async () => {
 const HomeLayout = () => {
   const navigation = useNavigation();
   const {data} = useQuery(userQuery);
-  
   const isLoading = navigation.state === "loading";
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(getCurrentUser(data));
-  }, [data]);
-
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+    //   dispatch(getCurrentUser(data));
+    // }, [data]);
+    
+    console.log(data);
   return (
     <div className="flex">
       <BigSidebar/>

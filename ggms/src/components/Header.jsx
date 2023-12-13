@@ -1,18 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate, useOutletContext} from "react-router-dom";
 import { customFetch } from "../utils";
 import { logoutUser } from "../features/user/userSlice";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router-dom/dist/umd/react-router-dom.development";
 
 const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [isAuthError, setisAuthError] = useState(false)
-  const user = useSelector((store) => store.user.user);
-  
-
   const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  // const user = useSelector((store) => store.user.user);
+  const {userQuery} = useLoaderData();
+  const {data} = useQuery(userQuery)
 
   const logout = async() => { 
     navigate("/login");
@@ -37,14 +38,12 @@ const Header = () => {
     logout();
   }, [isAuthError])
 
-
-
   return (
     <header className="bg-neutral py-2 text-neutral-content">
       <div className="align-element flex justify-center sm:justify-end">
-        {user ? (
+        {data ? (
           <div className="flex gap-x-6 justify-center items-center sm:gap-x-8">
-            <p className="text-xs sm:text-sm ">Hello, <span className="capitalize font-semibold text-primary">{user.username}</span></p>
+            <p className="text-xs sm:text-sm ">Hello, <span className="capitalize font-semibold text-primary">{data.username}</span></p>
             <button
               className="btn btn-xs btn-outline btn-primary"
               onClick={logout}

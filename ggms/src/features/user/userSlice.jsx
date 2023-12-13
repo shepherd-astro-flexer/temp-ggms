@@ -28,7 +28,6 @@ const userSlice = createSlice({
         logoutUser: (store) => {
             store.user = null;
             // localStorage.removeItem("user")
-            console.log("test");
             toast.success("You've been logged out.")
         },
         toggleTheme: (store) => {

@@ -6,11 +6,13 @@ import { toggleTheme } from "../features/user/userSlice";
 import {FaDumbbell} from "react-icons/fa6";
 import ouch from "../assets/images/ouch-w.png"
 import { toggleSidebar } from "../features/user/userSlice";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
-  const avatar = useSelector((store) => store?.user?.user?.avatar);
-  
   const dispatch = useDispatch();
+  const {userQuery} = useLoaderData();
+  const {data} = useQuery(userQuery)  
+  
   const handleTheme = () => {
     dispatch(toggleTheme())
   };
@@ -44,9 +46,9 @@ const Navbar = () => {
             {/* moon icon */}
             <BsMoonFill className="swap-off h-4 w-4" />
           </label>
-          {avatar ? <div className="avatar">
+          {data?.avatar ? <div className="avatar">
             <div className="w-8 rounded-full">
-              <img src={avatar} alt="avatar" />
+              <img src={data.avatar} alt="avatar" />
             </div>
           </div> : <img src={ouch} className="h-8 w-8"/>}
         </div>

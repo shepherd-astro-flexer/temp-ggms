@@ -11,6 +11,8 @@ export const action = (queryClient) => async ({request}) => {
   try {
     await customFetch.post("/clients/add-client", formData);
     queryClient.invalidateQueries(["clients"]);
+    queryClient.invalidateQueries(["attendance"]);
+
     toast.success("Client added successfully");
 
     return redirect("/all-clients");
