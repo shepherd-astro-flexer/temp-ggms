@@ -44,7 +44,7 @@ const AttendanceForm = () => {
       <Form>
         <div>
           <label htmlFor="createdDate" className="label label-text">Choose a date:</label>
-          <input type="date" name="createdDate" id="createdDate" className="input-sm max-w-md border border-base-content border-opacity-20 rounded-md w-full bg-base-100 uppercase" defaultValue={createdDate} onChange={(e) => {
+          <input type="date" name="createdDate" id="createdDate" className="input-sm max-w-md border border-base-content border-opacity-20 rounded-sm w-full bg-base-100 uppercase" defaultValue={createdDate} onChange={(e) => {
             submit(e.currentTarget.form)
           }}/>
           <p className="text-sm text-info">(Defaults to current date if ommited)</p>

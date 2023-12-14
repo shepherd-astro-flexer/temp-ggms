@@ -6,6 +6,6 @@ export default {
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
   daisyui:{
-    themes:["winter", "dracula", "night", "dark", "luxury", "business", "cmyk"]
+    themes:["business", "corporate"]
   }
 };

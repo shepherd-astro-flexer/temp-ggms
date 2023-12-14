@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 const getLocalStorageTheme = () => {
-    const theme = localStorage.getItem("theme") || "cmyk"
+    const theme = localStorage.getItem("theme") || "corporate"
     document.documentElement.setAttribute("data-theme", theme);
     return theme
 }
@@ -31,7 +31,7 @@ const userSlice = createSlice({
             toast.success("You've been logged out.")
         },
         toggleTheme: (store) => {
-            const newTheme = store.theme === "cmyk" ? "dracula" : "cmyk";
+            const newTheme = store.theme === "corporate" ? "business" : "corporate";
             store.theme = newTheme;
             document.documentElement.setAttribute("data-theme", store.theme)
             localStorage.setItem("theme", store.theme)
