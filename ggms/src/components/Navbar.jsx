@@ -11,8 +11,8 @@ import { useQuery } from "@tanstack/react-query";
 const Navbar = () => {
   const dispatch = useDispatch();
   const {userQuery} = useLoaderData();
-  const {data} = useQuery(userQuery)  
-  
+  const {data} = useQuery(userQuery);
+  console.log(data.avatar);
   const handleTheme = () => {
     dispatch(toggleTheme())
   };
