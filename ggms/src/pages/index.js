@@ -13,3 +13,6 @@ export { default as EditClient } from "./EditClient";
 export { default as AppStats } from "./AppStats";
 export { default as Profile } from "./Profile";
 export { default as Attendance } from "./Attendance";
+export { default as Dashboard } from "./Dashboard";
+
+

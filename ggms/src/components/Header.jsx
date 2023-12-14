@@ -16,7 +16,7 @@ const Header = () => {
   const {data} = useQuery(userQuery)
 
   const logout = async() => { 
-    navigate("/login");
+    navigate("/");
     dispatch(logoutUser());
     await customFetch.get("/auth/logout");
     queryClient.invalidateQueries();

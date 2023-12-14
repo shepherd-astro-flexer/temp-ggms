@@ -4,7 +4,7 @@ import {
   Clients,
   Error,
   HomeLayout,
-  Landing,
+  Dashboard,
   Login,
   Orders,
   Products,
@@ -13,7 +13,8 @@ import {
   EditClient,
   AppStats ,
   Profile,
-  Attendance
+  Attendance,
+  Landing
 } from "./pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -22,7 +23,7 @@ import { ErrorElement } from "./components";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import {Auth0Provider} from "@auth0/auth0-react"
+// import {Auth0Provider} from "@auth0/auth0-react"
 // loaders
 // import { loader as landingLoader } from "./pages/Landing";
 import { loader as clientsLoader } from "./pages/Clients";
@@ -42,7 +43,7 @@ import { loader as attendanceLoader } from "./pages/Attendance";
 import { action as loginAction } from "./pages/Login";
 import { action as registerAction } from "./pages/Register";
 import { action as checkoutAction } from "./components/ShippingInfo";
-import { action as landingAction } from "./pages/Landing";
+import { action as landingAction } from "./pages/Dashboard";
 import { action as editFormClientAction } from "./components/EditFormClient";
 import { action as deleteClientAction } from "./components/DeleteClient";
 import { action as profileAction } from "./pages/Profile";
@@ -61,14 +62,14 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/dashboard",
     element: <HomeLayout />,
     loader: homeLoader(store, queryClient),
     errorElement: <Error />,
     children: [
       {
         index: true,
-        element: <Landing />,
+        element: <Dashboard />,
         errorElement: <ErrorElement />,
         action: landingAction(queryClient),
       },
@@ -142,6 +143,11 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/",
+    element: <Landing />,
+    errorElement: <Error />
+  },
+  {
     path: "/login",
     action: loginAction(store, queryClient),
     element: <Login />,
@@ -157,13 +163,6 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <Auth0Provider
-    domain="dev-rrhk56w6pey8yvjl.us.auth0.com"
-    clientId="CJVAnk6S7dBMJAYgBzZDDdOtmvNOhZDI"
-    authorizationParams={{
-      redirect_uri: window.location.origin
-    }}
-  >
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
@@ -171,7 +170,6 @@ const App = () => {
         <ToastContainer position="top-center"/>
       </QueryClientProvider>
     </Provider>
-    </Auth0Provider>
   );
 };
 export default App;

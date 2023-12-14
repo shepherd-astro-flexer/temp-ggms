@@ -22,7 +22,7 @@ export const action = (store, queryClient) => async ({request}) => {
     await customFetch.post("/auth/login", data);
     queryClient.invalidateQueries();
     toast.success("Logged in successfully")
-    return redirect("/")
+    return redirect("/dashboard");
   } catch (error) {
     toast.error(error?.response?.data?.msg || "test login")
     return error
@@ -41,7 +41,7 @@ const Login = () => {
     try {
       await customFetch.post("/auth/login", data);
       toast.success("Take a test drive.")
-      navigate("/")
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Guest user problem. Please try again later.")
     }
@@ -77,7 +77,7 @@ const Login = () => {
           guest user
         </button> */}
         <p className="text-center">
-          Not a member yet?{" "}
+          Not a user yet?{" "}
           <Link
             to="/register"
             className="ml-2 link link-hover link-primary capitalize"

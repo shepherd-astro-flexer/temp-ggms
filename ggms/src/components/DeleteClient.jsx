@@ -11,6 +11,6 @@ export const action = (queryClient) => async ({params}) => {
         toast.error(error?.response?.data?.msg);
     }
 
-    return redirect("/all-clients");
+    return redirect("/dashboard/all-clients");
 }
 

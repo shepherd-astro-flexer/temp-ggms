@@ -47,7 +47,7 @@ const AttendanceForm = () => {
           <input type="date" name="createdDate" id="createdDate" className="input-sm max-w-md border border-base-content border-opacity-20 rounded-sm w-full bg-base-100 uppercase" defaultValue={createdDate} onChange={(e) => {
             submit(e.currentTarget.form)
           }}/>
-          <p className="text-sm text-info">(Defaults to current date if ommited)</p>
+          <p className="text-sm text-info">(Defaults to today's date if ommited)</p>
         </div>
         <div className="mt-4">
           <label className="label label-text">Click or search a client that you want to add on the list:</label>

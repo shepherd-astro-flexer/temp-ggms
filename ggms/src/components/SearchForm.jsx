@@ -34,7 +34,7 @@ const SearchForm = () => {
         </div> */}
         <div className="flex items-end mt-4">
           <button className="btn btn-sm btn-block btn-accent" type="button" onClick={() => {
-            navigate("/all-clients")
+            navigate("/dashboard/all-clients")
           }}>
             reset
           </button>

@@ -24,7 +24,6 @@ export const loader = (store, queryClient) => async () => {
     await queryClient.ensureQueryData(userQuery);
     // queryClient.invalidateQueries();
     // store.dispatch(getCurrentUser(data));
-    
     return {userQuery};
   } catch (error) {
     toast.warn("You must be logged in");

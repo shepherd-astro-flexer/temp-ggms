@@ -24,7 +24,7 @@ export const action = (queryClient) => async ({request}) => {
         toast.error(error?.response?.data?.msg || "Something went wrong")
     }
 
-    return redirect("/")
+    return redirect("/dashboard")
 }
 
 // * loader

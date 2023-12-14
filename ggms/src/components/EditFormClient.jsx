@@ -16,7 +16,7 @@ export const action = (queryClient) => async ({params, request}) => {
     await customFetch.patch(`/clients/${params.id}`, data);
     queryClient.invalidateQueries(["clients"])
     toast.success("Edited client successfully");
-    return redirect("/all-clients");
+    return redirect("/dashboard/all-clients");
   } catch (error) {
     console.log(error);
     toast.error(error?.response?.data?.msg || "something went wrong");
