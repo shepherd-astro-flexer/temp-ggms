@@ -18,7 +18,7 @@ const SmallSidebar = () => {
         <div className="flex flex-col gap-6 items-center">
             <div className="flex items-center px-20 mt-4">
                 <div className="bg-primary p-3.5 rounded-xl">
-                    <FaDumbbell className="h-7 w-7 text-secondary-content"/>
+                    <FaDumbbell className="h-7 w-7"/>
                 </div>
                 <p className="text-2xl text-primary font-bold capitalize ml-4 tracking-widest">
                     gilas

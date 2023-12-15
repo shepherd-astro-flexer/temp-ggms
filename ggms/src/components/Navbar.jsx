@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="navbar-center">
           <div className="flex items-center lg:hidden">
             <div className="bg-primary p-1.5 rounded-md">
-              <FaDumbbell className="h-5 w-5 text-secondary-content"/>
+              <FaDumbbell className="h-5 w-5"/>
             </div>
             <p className="text-md text-primary font-bold capitalize ml-2 tracking-widest">gilas</p>
           </div>
