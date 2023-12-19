@@ -40,7 +40,7 @@ const HomeLayout = () => {
     //   dispatch(getCurrentUser(data));
     // }, [data]);
     
-    console.log(data);
+    // console.log(data);
   return (
     <div className="flex">
       <BigSidebar/>

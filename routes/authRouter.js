@@ -5,7 +5,6 @@ import { loginUser, logoutUser, registerUser } from "../controllers/authControll
 // validation
 import { validateRegister, validateLogin } from "../middleware/validationMiddleware.js";
 
-
 export const router = express.Router();
 
 const apiLimiter = rateLimiter({

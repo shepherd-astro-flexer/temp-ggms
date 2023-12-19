@@ -9,6 +9,8 @@ import {MdPersonSearch} from "react-icons/md";
 import {MdAdminPanelSettings} from "react-icons/md"
 import {ImProfile} from "react-icons/im";
 import { FaUserCheck } from "react-icons/fa6";
+import { useLoaderData } from "react-router-dom/dist/umd/react-router-dom.development";
+import { useQuery } from "@tanstack/react-query";
 
 const links = [
   { id: nanoid(6), path: "/dashboard", text: "add client", icon: <MdPersonAddAlt1 className="h-6 w-6"/>},
@@ -20,7 +22,9 @@ const links = [
 
 const NavLinks = ({big}) => {
   const dispatch = useDispatch()
-  const role = useSelector((store) => store?.user?.user?.role)
+  // const role = useSelector((store) => store?.user?.user?.role)
+  const {userQuery} = useLoaderData();
+  const {data: {role}} = useQuery(userQuery);
   
   const {pathname} = useLocation()
   const {isSidebarOpen} = useSelector(store => store.user)
@@ -29,9 +33,9 @@ const NavLinks = ({big}) => {
     <>
       {links.map((link) => {
         const { id, path, text, icon } = link;
-
+        
         if (role !== "admin" && text === "admin") {
-          return
+          return null
         }
 
         return (

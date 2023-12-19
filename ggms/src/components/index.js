@@ -28,6 +28,8 @@ export {default as AttendanceList} from "./AttendanceList"
 export {default as AttendanceForm} from "./AttendanceForm"
 export {default as ClientsPagination} from "./ClientsPagination"
 export {default as LoginButton} from "./LoginButton"
+export {default as GoogleButton} from "./GoogleButton"
+
 
 
 

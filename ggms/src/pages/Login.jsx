@@ -1,5 +1,5 @@
 import { Form, Link, redirect, useNavigate } from "react-router-dom";
-import { FormInput, LoginButton, SubmitBtn } from "../components";
+import { FormInput, GoogleButton, LoginButton, SubmitBtn } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import gilasWhite from "../assets/images/gilas-white.png";
@@ -68,6 +68,7 @@ const Login = () => {
         />
         <div className="mt4">
           <SubmitBtn text="login" icon={<FiLogIn/>}/>
+          <GoogleButton />
         </div>
         
           {/* <LoginButton /> */}
