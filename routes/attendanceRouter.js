@@ -1,7 +1,7 @@
 import express from "express";
 
 // local imports
-import { addAttendee, deleteAttendee } from "../controllers/attendanceControllers.js";
+import { addAttendee, deleteAttendee, editAttendee } from "../controllers/attendanceControllers.js";
 import { validateAttendance } from "../middleware/validationMiddleware.js";
 import { checkTestUser } from "../middleware/authMiddleware.js";
 
@@ -13,6 +13,10 @@ router.route("/")
 })
 .post(checkTestUser ,validateAttendance, addAttendee)
 
-router.delete("/:id", checkTestUser, deleteAttendee)
+router.route("/:id")
+.delete(checkTestUser, deleteAttendee)
+.patch(checkTestUser, editAttendee)
+
+
 
 export default router;

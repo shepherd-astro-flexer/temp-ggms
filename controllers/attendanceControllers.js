@@ -12,3 +12,9 @@ export const deleteAttendee = async (req, res) => {
     await Attendance.deleteOne({_id: req.params.id})
     res.status(200).json({msg: "successfully deleted attendee"})
 }
+
+export const editAttendee = async (req, res) => {
+    console.log(req.params.id);
+    await Attendance.findByIdAndUpdate(req.params.id)
+    res.status(204).json({msg: "successfully edited attendee"})
+}

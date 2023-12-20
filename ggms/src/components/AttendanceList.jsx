@@ -23,12 +23,14 @@ const AttendanceList = () => {
                 <th>Name</th>
                 <th>Last Name</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             {attendees.map((attendee, idx) => {
                 return <AttendeeCard key={attendee.clientId} {...attendee} idx={idx + 1}/>
             })} 
+            
             </tbody>
         </table>
     </div>
