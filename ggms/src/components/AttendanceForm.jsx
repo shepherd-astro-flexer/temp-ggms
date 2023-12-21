@@ -7,23 +7,23 @@ import { useQuery } from "@tanstack/react-query";
 
 // import FormPagination from "./FormPagination";
 
-export const action = (queryClient) => async ({request}) => {
-  const formData = await request.formData();
-  let data = Object.fromEntries(formData);
-  const url = new URL(request.url);
-  const searchParams = Object.fromEntries(url.searchParams)
-  data.createdDate = searchParams.createdDate || currentDate();
- try {
-  const {data: client} = await customFetch.post("/attendance/", data);
-  queryClient.invalidateQueries(["attendance"])
-  const clientName = client.name.charAt(0).toUpperCase() + client.name.slice(1);
-  toast.success(`Successfully added ${clientName} on the list`);
-  return null
- } catch (error) {
-  toast.error(error?.response?.data?.msg || "something went wrong")
-  return error
- }
-}
+// export const action = (queryClient) => async ({request}) => {
+//   const formData = await request.formData();
+//   let data = Object.fromEntries(formData);
+//   const url = new URL(request.url);
+//   const searchParams = Object.fromEntries(url.searchParams)
+//   data.createdDate = searchParams.createdDate || currentDate();
+//  try {
+//   const {data: client} = await customFetch.post("/attendance/", data);
+//   queryClient.invalidateQueries(["attendance"])
+//   const clientName = client.name.charAt(0).toUpperCase() + client.name.slice(1);
+//   toast.success(`Successfully added ${clientName} on the list`);
+//   return null
+//  } catch (error) {
+//   toast.error(error?.response?.data?.msg || "something went wrong")
+//   return error
+//  }
+// }
 
 const AttendanceForm = () => {
   // ! hindi lang naman sa main page pwede gamitin yung useQuery, right?
@@ -66,7 +66,7 @@ const AttendanceForm = () => {
                   return attendee.clientId === _id
               })
 
-              return <Form key={_id} method="POST">
+              return <Form key={_id} method="POST" action="/dashboard/add-attendee">
                   <input type="hidden" name="name" value={name}/>
                   <input type="hidden" name="lastName" value={lastName}/>
                   <input type="hidden" name="clientId" value={_id}/>
