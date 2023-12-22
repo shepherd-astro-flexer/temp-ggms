@@ -1,4 +1,4 @@
-import { SEX } from "../../../utils/constants";
+import { MEMBER_TYPE, SEX } from "../../../utils/constants";
 import { Form, redirect, useLoaderData } from "react-router-dom";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
@@ -10,7 +10,7 @@ import DateInput from "./DateInput";
 export const action = (queryClient) => async ({params, request}) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  
+  // ! make sure we are getting the correct value for the member type
   try {
     // ! we are going for the patch request because that is what the server is requesting 
     await customFetch.patch(`/clients/${params.id}`, data);
@@ -36,6 +36,7 @@ const FormClient = ({title, data}) => {
         <FormInput label="email" name="email" size="input-sm" type="email" defaultValue={email}/>
         <DateInput defaultValue={birthdate}/>
         <FormSelect optionsArray={Object.values(SEX)} option="sex" searchObj={sex}/>
+        <FormSelect optionsArray={Object.values(MEMBER_TYPE)} option="type" searchObj={sex}/>
         <div className="flex items-end mt-4">
           <SubmitBtn text="submit" size="btn-sm"/>
         </div>
