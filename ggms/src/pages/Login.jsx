@@ -68,7 +68,7 @@ const Login = () => {
         />
         <div className="mt4">
           <SubmitBtn text="login" icon={<FiLogIn/>}/>
-          <GoogleButton />
+          {/* <GoogleButton /> */}
         </div>
         
           {/* <LoginButton /> */}

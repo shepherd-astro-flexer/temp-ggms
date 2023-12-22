@@ -3,7 +3,7 @@ import { customFetch } from "../utils"
 import { toast } from "react-toastify"
 
 export const action = (queryClient) => async ({params}) => {
-    console.log(params.id);
+    
     try {
         await customFetch.delete(`/clients/${params.id}`);
         queryClient.invalidateQueries(["clients"]);

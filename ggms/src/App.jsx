@@ -47,9 +47,9 @@ import { action as landingAction } from "./pages/Dashboard";
 import { action as editFormClientAction } from "./components/EditFormClient";
 import { action as deleteClientAction } from "./components/DeleteClient";
 import { action as profileAction } from "./pages/Profile";
-import { action as attendanceAction } from "./components/AttendanceForm";
+import { action as addAttendeeAction } from "./components/AddAttendee";
+import { action as addNoteAction } from "./components/Modal";
 // import { action as clientAction} from "./components/ClientCard";
-
 // import { action as productsAction } from "./pages/Products";
 
 const queryClient = new QueryClient({
@@ -137,8 +137,12 @@ const router = createBrowserRouter([
         path: "attendance",
         element: <Attendance />,
         loader: attendanceLoader(queryClient),
-        action: attendanceAction(queryClient), 
+        action: addNoteAction(queryClient), 
         errorElement: <ErrorElement/>
+      },
+      {
+        path: "add-attendee",
+        action: addAttendeeAction(queryClient)
       }
     ],
   },
