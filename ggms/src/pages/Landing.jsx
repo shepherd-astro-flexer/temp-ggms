@@ -22,7 +22,7 @@ const Landing = () => {
           <h1 className="capitalize text-3xl font-bold tracking-wide mb-6 md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">gym <span className="text-primary">management</span> system</h1>
           <p className="mb-6 tracking-wide max-w-xl leading-8">Experience the convenience of a cloud-based system accessible from anywhere, anytime, allowing you to stay connected and in control, even on the go. Tara laro!</p>
           <div>
-            <Link className="btn btn-primary btn-sm text-md font-normal capitalize tracking-wide mr-4" to="/register">Register</Link>
+            {/* <Link className="btn btn-primary btn-sm text-md font-normal capitalize tracking-wide mr-4" to="/register">Register</Link> */}
             <Link className="btn btn-primary btn-sm text-md font-normal capitalize tracking-wide" to="/login">Login</Link>
           </div>
         </div>

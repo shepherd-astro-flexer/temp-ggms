@@ -3,6 +3,7 @@ import { FormInput, GoogleButton, LoginButton, SubmitBtn } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import gilasWhite from "../assets/images/gilas-white.png";
+import bgLogin from "../assets/images/bg-login.svg";
 import {FiLogIn} from "react-icons/fi"; 
 
 // const loginQuery = (postData) => {
@@ -49,12 +50,12 @@ const Login = () => {
   }
 
   return (
-    <section className="h-screen grid place-items-center">
+    <section className="flex h-screen justify-center items-center gap-12">
       <Form
         method="POST"
         className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
       >
-        <img src={gilasWhite} alt="login-img" className=""/>
+        <img src={gilasWhite} alt="gilas-img" className="lg:hidden"/>
         <h4 className="text-center text-3xl font-bold">Login</h4>
         <FormInput
           type="email"
@@ -77,7 +78,7 @@ const Login = () => {
         {/* <button onClick={loginGuestUser} type="button" className="btn btn-secondary btn-block">
           guest user
         </button> */}
-        <p className="text-center">
+        {/* <p className="text-center">
           Not a user yet?{" "}
           <Link
             to="/register"
@@ -85,9 +86,10 @@ const Login = () => {
           >
             register
           </Link>
-        </p>
+        </p> */}
       </Form>
-      
+      {/* <img src={bgLogin} alt="bg-login" className="h-80"/> */}
+      <img src={gilasWhite} alt="gilas-img" className="h-96 hidden lg:block"/>
     </section>
   );
 };

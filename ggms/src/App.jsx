@@ -157,12 +157,12 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error />,
   },
-  {
-    path: "/register",
-    action: registerAction,
-    element: <Register />,
-    errorElement: <Error />,
-  },
+  // {
+  //   path: "/register",
+  //   action: registerAction,
+  //   element: <Register />,
+  //   errorElement: <Error />,
+  // },
 ]);
 
 const App = () => {

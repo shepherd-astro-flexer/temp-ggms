@@ -25,7 +25,7 @@ export const action = (queryClient) => async ({params, request}) => {
 }
 
 const FormClient = ({title, data}) => {
-  const {name, lastName, email, sex, birthdate} = data;
+  const {name, lastName, email, sex, birthdate, type} = data;
   console.log(birthdate);
   return (
     <Form method="POST" className="bg-base-200 p-8 rounded-md">
@@ -36,7 +36,7 @@ const FormClient = ({title, data}) => {
         <FormInput label="email" name="email" size="input-sm" type="email" defaultValue={email}/>
         <DateInput defaultValue={birthdate}/>
         <FormSelect optionsArray={Object.values(SEX)} option="sex" searchObj={sex}/>
-        <FormSelect optionsArray={Object.values(MEMBER_TYPE)} option="type" searchObj={sex}/>
+        <FormSelect optionsArray={Object.values(MEMBER_TYPE)} option="type" searchObj={type}/>
         <div className="flex items-end mt-4">
           <SubmitBtn text="submit" size="btn-sm"/>
         </div>
