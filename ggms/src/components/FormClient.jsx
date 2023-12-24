@@ -1,4 +1,4 @@
-import { SEX } from "../../../utils/constants";
+import { MEMBER_TYPE, SEX } from "../../../utils/constants";
 import { Form } from "react-router-dom";
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
@@ -15,6 +15,7 @@ const FormClient = () => {
         <FormInput label="email" name="email" size="input-sm" type="email" defaultValue="tara_laro@gilasgym.com"/>
         <DateInput />
         <FormSelect optionsArray={Object.values(SEX)} option="sex"/>
+        <FormSelect optionsArray={Object.values(MEMBER_TYPE)} option="type"/>
         <div className="flex items-end mt-4">
           <SubmitBtn text="submit" size="btn-sm"/>
         </div>

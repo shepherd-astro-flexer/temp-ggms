@@ -7,7 +7,7 @@ const AttendeeCard = ({_id, name, lastName, clientId, idx, note}) => {
     const navigate = useNavigate();
     const {pathname, search} = useLocation();
     const queryClient = useQueryClient();
-    console.log(note);
+
     const deleteAtendee = async () => {
        await customFetch.delete(`/attendance/${_id}`);
        queryClient.invalidateQueries(["attendance"]);
@@ -19,7 +19,7 @@ const AttendeeCard = ({_id, name, lastName, clientId, idx, note}) => {
         <th>{idx}</th>
         <td className="capitalize">{name}</td>
         <td className="capitalize">{lastName}</td>
-        <td><Modal id={_id}/></td>
+        <td><Modal id={_id} note={note} name={name}/></td>
         <td><button className="btn btn-xs btn-secondary capitalize" onClick={deleteAtendee}>delete</button></td>
     </tr>
   )

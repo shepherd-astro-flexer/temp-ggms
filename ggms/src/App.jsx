@@ -48,10 +48,13 @@ import { action as editFormClientAction } from "./components/EditFormClient";
 import { action as deleteClientAction } from "./components/DeleteClient";
 import { action as profileAction } from "./pages/Profile";
 import { action as addAttendeeAction } from "./components/AddAttendee";
+<<<<<<< HEAD
 import { action as editAttendeeNoteAction } from "./components/Modal";
 // import { action as attendanceAction } from "./components/AttendanceForm";
+=======
+import { action as addNoteAction } from "./components/Modal";
+>>>>>>> 8f984a4bcc589187c769f04a8dcf927c3ad0b735
 // import { action as clientAction} from "./components/ClientCard";
-
 // import { action as productsAction } from "./pages/Products";
 
 const queryClient = new QueryClient({
@@ -139,7 +142,11 @@ const router = createBrowserRouter([
         path: "attendance",
         element: <Attendance />,
         loader: attendanceLoader(queryClient),
+<<<<<<< HEAD
         action: editAttendeeNoteAction(queryClient),
+=======
+        action: addNoteAction(queryClient), 
+>>>>>>> 8f984a4bcc589187c769f04a8dcf927c3ad0b735
         errorElement: <ErrorElement/>
       },
       {
@@ -159,12 +166,12 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <Error />,
   },
-  {
-    path: "/register",
-    action: registerAction,
-    element: <Register />,
-    errorElement: <Error />,
-  },
+  // {
+  //   path: "/register",
+  //   action: registerAction,
+  //   element: <Register />,
+  //   errorElement: <Error />,
+  // },
 ]);
 
 const App = () => {

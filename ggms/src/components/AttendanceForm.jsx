@@ -5,39 +5,20 @@ import ClientsPagination from "./ClientsPagination";
 import { useNavigation } from "react-router-dom/dist/umd/react-router-dom.development";
 import { useQuery } from "@tanstack/react-query";
 
-// import FormPagination from "./FormPagination";
-
-// export const action = (queryClient) => async ({request}) => {
-//   const formData = await request.formData();
-//   let data = Object.fromEntries(formData);
-//   const url = new URL(request.url);
-//   const searchParams = Object.fromEntries(url.searchParams)
-//   data.createdDate = searchParams.createdDate || currentDate();
-//  try {
-//   const {data: client} = await customFetch.post("/attendance/", data);
-//   queryClient.invalidateQueries(["attendance"])
-//   const clientName = client.name.charAt(0).toUpperCase() + client.name.slice(1);
-//   toast.success(`Successfully added ${clientName} on the list`);
-//   return null
-//  } catch (error) {
-//   toast.error(error?.response?.data?.msg || "something went wrong")
-//   return error
-//  }
-// }
-
 const AttendanceForm = () => {
   // ! hindi lang naman sa main page pwede gamitin yung useQuery, right?
   const {searchParams, queryFunc} = useLoaderData();
   const {data} = useQuery(queryFunc(searchParams));
   const {clients, attendees, query: {createdDate, search : searchName}} = data;
-  
+
   const submit = useSubmit();
   // * used useSubmit hook for a different approach :D
   // const navigate = useNavigate();
   // const {pathname, search} = useLocation();
   const navigation = useNavigation();
   const submitting = navigation.state === "submitting";
-
+  const {search} = useLocation();
+  
   return (
     <div className="bg-base-200 p-8 rounded-md">
       <h1 className="text-3xl capitalize">attendance form</h1>
@@ -66,7 +47,7 @@ const AttendanceForm = () => {
                   return attendee.clientId === _id
               })
 
-              return <Form key={_id} method="POST" action="/dashboard/add-attendee">
+              return <Form key={_id} method="POST" action={`/dashboard/add-attendee${search}`}>
                   <input type="hidden" name="name" value={name}/>
                   <input type="hidden" name="lastName" value={lastName}/>
                   <input type="hidden" name="clientId" value={_id}/>

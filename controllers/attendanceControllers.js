@@ -14,7 +14,6 @@ export const deleteAttendee = async (req, res) => {
 }
 
 export const editAttendee = async (req, res) => {
-    console.log(req.params.id);
-    await Attendance.findByIdAndUpdate(req.params.id)
+    await Attendance.findByIdAndUpdate(req.params.id, req.body)
     res.status(204).json({msg: "successfully edited attendee"})
 }

@@ -13,6 +13,10 @@ const ClientSchema = new mongoose.Schema({
         type: String,
         enum: ["male", "female"],
     },
+    type: {
+        type: String,
+        enum: ["regular", "student"]
+    },
     email: String,
     // ! added birthdate
     birthdate: String,

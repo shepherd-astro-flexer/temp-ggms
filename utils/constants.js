@@ -21,3 +21,8 @@ export const SEX = {
    MALE: "male",
    FEMALE: "female"
 }
+
+export const MEMBER_TYPE = {
+    REGULAR: "regular",
+    STUDENT: "student"
+}

@@ -1,6 +1,6 @@
 import { body, param, query, validationResult } from "express-validator";
 import mongoose from "mongoose";
-import { JOB_STATUS, JOB_TYPE } from "../utils/constants.js";
+import { JOB_STATUS, JOB_TYPE, MEMBER_TYPE } from "../utils/constants.js";
 import { BadRequestError, ForbiddenError, NotFoundError } from "../errors/customErrors.js";
 // import Job from "../models/JobModel.js";
 import User from "../models/UserModel.js";
@@ -98,8 +98,7 @@ export const validateRegister = validateJob([
     .withMessage("password is required")
     .isLength({min: 5})
     .withMessage("password should be at least 5 characters long")
-    .trim(),
-    
+    .trim()
 ])
 
 export const validateLogin = validateJob([
@@ -159,7 +158,11 @@ export const validateClientInput = validateJob([
   body("sex")
   .notEmpty()
   .isIn(Object.values(SEX))
-  .withMessage("invalid sex value")
+  .withMessage("invalid sex value"),
+  body("type")
+  .notEmpty()
+  .isIn(Object.values(MEMBER_TYPE))
+  .withMessage("invalid member type value")
 ]) 
 
 // ! attendance middleware

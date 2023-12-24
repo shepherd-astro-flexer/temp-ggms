@@ -5,11 +5,11 @@ import { toast } from "react-toastify"
 import FormClient from "../components/FormClient"
 
 export const action = (queryClient) => async ({request}) => {
-  const formData = Object.fromEntries(await request.formData());
-  console.log(formData);
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
   
   try {
-    await customFetch.post("/clients/add-client", formData);
+    await customFetch.post("/clients/add-client", data);
     queryClient.invalidateQueries(["clients"]);
     queryClient.invalidateQueries(["attendance"]);
 
