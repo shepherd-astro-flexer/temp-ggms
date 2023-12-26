@@ -3,7 +3,6 @@ import { FormInput, GoogleButton, LoginButton, SubmitBtn } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import gilasWhite from "../assets/images/gilas-white.png";
-import bgLogin from "../assets/images/bg-login.svg";
 import {FiLogIn} from "react-icons/fi"; 
 
 // const loginQuery = (postData) => {

@@ -8,7 +8,6 @@ import {
   Login,
   Orders,
   Products,
-  Register,
   SingleProduct,
   EditClient,
   AppStats ,
@@ -41,19 +40,14 @@ import { loader as attendanceLoader } from "./pages/Attendance";
 
 // actions
 import { action as loginAction } from "./pages/Login";
-import { action as registerAction } from "./pages/Register";
 import { action as checkoutAction } from "./components/ShippingInfo";
 import { action as landingAction } from "./pages/Dashboard";
 import { action as editFormClientAction } from "./components/EditFormClient";
 import { action as deleteClientAction } from "./components/DeleteClient";
 import { action as profileAction } from "./pages/Profile";
 import { action as addAttendeeAction } from "./components/AddAttendee";
-<<<<<<< HEAD
-import { action as editAttendeeNoteAction } from "./components/Modal";
-// import { action as attendanceAction } from "./components/AttendanceForm";
-=======
 import { action as addNoteAction } from "./components/Modal";
->>>>>>> 8f984a4bcc589187c769f04a8dcf927c3ad0b735
+// import { action as registerAction } from "./pages/Register";
 // import { action as clientAction} from "./components/ClientCard";
 // import { action as productsAction } from "./pages/Products";
 
@@ -142,11 +136,7 @@ const router = createBrowserRouter([
         path: "attendance",
         element: <Attendance />,
         loader: attendanceLoader(queryClient),
-<<<<<<< HEAD
-        action: editAttendeeNoteAction(queryClient),
-=======
         action: addNoteAction(queryClient), 
->>>>>>> 8f984a4bcc589187c769f04a8dcf927c3ad0b735
         errorElement: <ErrorElement/>
       },
       {

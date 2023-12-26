@@ -8,6 +8,10 @@ const AttendanceSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    type: {
+        type: String,
+        ref: "Client"
+    },
     clientId: {
         type: mongoose.Types.ObjectId,
         ref: "Client"

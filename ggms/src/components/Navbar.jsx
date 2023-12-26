@@ -37,7 +37,7 @@ const Navbar = () => {
           </div>
           <p className="hidden text-2xl tracking-wider lg:block xl:text-3xl">Dashboard</p>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-2">
           {/* THEME SETUP */}
           <label className="swap swap-rotate">
             <input type="checkbox" onChange={handleTheme} />

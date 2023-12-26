@@ -17,7 +17,7 @@ export const createClient = async (req, res) => {
 }
 
 export const searchClient = async (req, res) => {
-    const {search, sort, createdDate} = req.query;
+    const {search, sort, type, createdDate} = req.query;
     
     const {isTestUser, userId} = req.user;
     // ? how do we sort the data?
@@ -36,6 +36,10 @@ export const searchClient = async (req, res) => {
             {name: {$regex: search, $options: "i"}},
             {lastName: {$regex: search, $options: "i"}}
         ]
+    }
+
+    if (type && type !== "all") {
+        filterObject.type = type;
     }
     // ! if we go with this condition wherein we just check if jobType is NOT equals to "all", when the value is undefined it will still use it
     // ! so a good thing to do here is to check if jobType exist, basically check if it is true, and if that is the case use it; If not, don't
@@ -63,12 +67,12 @@ export const searchClient = async (req, res) => {
     // * so ang value netong skip will depend on how many items you want to skip
     const clients = await Client.find(filterObject).sort(sortItems).skip(skip).limit(10);
     // * asynchrounously returns the number of items on a specific model
-    const totalJobs = await Client.countDocuments(filterObject);
+    const totalClients = await Client.countDocuments(filterObject);
     
-    const numberOfPages = Math.ceil(totalJobs / 10); 
+    const numberOfPages = Math.ceil(totalClients / 10); 
     console.log(req.query);
 
-    res.status(StatusCodes.OK).json({currentPage: page, numberOfPages, totalJobs, clients, attendees, query: req.query});
+    res.status(StatusCodes.OK).json({currentPage: page, numberOfPages, totalClients, clients, attendees, query: req.query});
 }
 // ! validate the id
 export const getClient = async (req, res) => {
@@ -78,10 +82,14 @@ export const getClient = async (req, res) => {
 }
 
 export const editClient = async (req, res) => {
+    
+
     const client = await Client.findByIdAndUpdate(req.params.id, req.body, {
         new: true
     })
-    console.log(client);
+
+    await Attendance.updateMany({clientId: req.params.id}, {type: client.type});
+
     res.status(StatusCodes.OK).json({msg: "client edited successfully"})
 }
 

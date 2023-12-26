@@ -1,14 +1,11 @@
 import { Outlet, useNavigation, redirect} from "react-router-dom";
 import { Navbar, Header, Loading, BigSidebar, SmallSidebar } from "../components";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateTotalAmount } from "../features/cart/cartSlice";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
-import { getCurrentUser } from "../features/user/userSlice";
-import { nanoid } from "nanoid";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
-import { useAuth0 } from "@auth0/auth0-react";
+import { store } from "../store";
+import {useQuery} from "@tanstack/react-query";
+import { useLocation } from "react-router-dom/dist/umd/react-router-dom.development";
+
 
 const userQuery = {
   queryKey: ["user"],
@@ -35,6 +32,8 @@ const HomeLayout = () => {
   const navigation = useNavigation();
   const {data} = useQuery(userQuery);
   const isLoading = navigation.state === "loading";
+
+  // const isTrue = pathname === "/dashboard/attendance" || pathname === "/dashboard/all-clients"
   // const dispatch = useDispatch();
   // useEffect(() => {
     //   dispatch(getCurrentUser(data));
@@ -42,7 +41,7 @@ const HomeLayout = () => {
     
     // console.log(data);
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <BigSidebar/>
       <SmallSidebar/>
       <div className="w-full">
@@ -51,7 +50,7 @@ const HomeLayout = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <section className="align-element py-20 h-screen">
+          <section className="align-element py-20">
             <Outlet context={data}/>
           </section>
         )}

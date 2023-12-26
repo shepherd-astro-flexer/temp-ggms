@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const allClientQuery = (params) => {
-  const {search, sort, page} = params
-  // // ! I'm dumb :/ it's returning a promise, that's why... WAHHHH!!!
+  const {search, sort, page, type} = params
+  console.log(type);
+  // // ! Fudge :/ it's returning a promise, that's why... WAHHHH!!!
   return {
-    queryKey: ["clients", search || "", sort || "oldest", page || "1"],
+    queryKey: ["clients", search || "", sort || "oldest", page || "1", type || "all"],
     queryFn: async () => {
       const {data} = await customFetch.get("/clients/search-clients", {
         params,

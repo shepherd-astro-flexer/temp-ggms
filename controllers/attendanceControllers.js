@@ -1,7 +1,11 @@
 import Attendance from "../models/AttendanceModel.js";
+import Client from "../models/ClientModel.js";
+
 
 export const addAttendee = async (req, res) => {
     // const {createdDate, name, lastName, clientId} = req.body;
+    // const client = await Client.
+    console.log(req.body);
     const attendee = await Attendance.create(req.body);
     console.log(attendee);
     res.status(201).json(attendee);
