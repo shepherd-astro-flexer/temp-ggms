@@ -1,7 +1,7 @@
 import express from "express";
 import rateLimiter from "express-rate-limit"
 // local imports
-import { loginUser, logoutUser, registerUser } from "../controllers/authControllers.js";
+import { googleLogin, loginUser, logoutUser, registerUser } from "../controllers/authControllers.js";
 // validation
 import { validateRegister, validateLogin } from "../middleware/validationMiddleware.js";
 
@@ -17,6 +17,8 @@ const apiLimiter = rateLimiter({
 
 router.route("/login")
 .post(apiLimiter, validateLogin, loginUser)
+
+router.post("/google-login", googleLogin)
 
 router.route("/register")
 .post(apiLimiter, validateRegister, registerUser)

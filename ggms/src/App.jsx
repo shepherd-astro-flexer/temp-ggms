@@ -22,6 +22,7 @@ import { ErrorElement } from "./components";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // import {Auth0Provider} from "@auth0/auth0-react"
 // loaders
 // import { loader as landingLoader } from "./pages/Landing";
@@ -166,13 +167,15 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools />
-        <ToastContainer position="top-center"/>
-      </QueryClientProvider>
-    </Provider>
-  );
+    <GoogleOAuthProvider clientId="1464069715-ng4m4le8rdcip6bn1uqp2asve1vvfu16.apps.googleusercontent.com">
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools />
+          <ToastContainer position="top-center"/>
+        </QueryClientProvider>
+      </Provider>
+    </GoogleOAuthProvider>
+  )
 };
 export default App;

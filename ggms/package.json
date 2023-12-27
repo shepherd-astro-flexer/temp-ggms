@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.3",
+    "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",

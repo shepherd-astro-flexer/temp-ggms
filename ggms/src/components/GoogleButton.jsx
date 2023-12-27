@@ -1,29 +1,36 @@
-import axios from "axios";
-import {FcGoogle} from "react-icons/fc";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+import {FaGoogle} from "react-icons/fa"
 import { customFetch } from "../utils";
+import axios from "axios";
+
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
+const GoogleButton = () => {
+  const navigate = useNavigate()
+    
+  const login = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const {data} = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`
+          }
+        })
+        
+        await customFetch.post("/auth/google-login", data)
+        toast.success("Logged in successfully")
+        navigate("/dashboard")
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  })
 
-const SubmitBtn = () => {
-    const navigate = useNavigate()
+  return <button type="button" className="btn btn-secondary capitalize" onClick={() => login()}><FaGoogle className="w-5 h-5"/> Login with Google</button>;
+  
+}
+export default GoogleButton
 
-    const gmailSignIn = async () => {
-        try {
-          const response = await customFetch("/v1/auth/google");
-            console.log(response.data);
-        //   console.log('OAuth Response:', response.data);
-          // Handle the response, which may redirect or return data for further handling
-        //   navigate("/api/v1/auth/google")
-        } catch (error) {
-          console.error('Error initiating OAuth:', error);
-        }
-    };
-
-  return (
-    <button type="button" className={`btn btn-primary btn-block mt-4`} onClick={gmailSignIn}>
-        <FcGoogle />
-    </button>
-  );
-};
-export default SubmitBtn;

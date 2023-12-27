@@ -5,6 +5,7 @@ import { UnauthorizedError } from "../errors/customErrors.js";
 import { createToken } from "../utils/token.js";
 
 export const loginUser = async (req, res) => {
+    console.log(req.body);
     const {email, password} = req.body;
       // using the req object, find the email on the database
     const user = await User.findOne({email})
@@ -25,6 +26,31 @@ export const loginUser = async (req, res) => {
         secure: process.env.NODE_ENV === "production"
     })
     // we are not going to send the token in the http only cookie approach
+    res.status(StatusCodes.OK).json({msg: "logged in successfully" })
+}
+
+export const googleLogin = async (req, res) => {
+    const {name, email} = req.body;
+
+    let user = await User.findOne({email});
+
+    if (!user) {
+        user = await User.create({
+            username: name,
+            email
+        })
+    }
+    
+    const token = createToken({userId: user._id, role: user.role})
+    
+    const oneDay = 1000 * 60 * 60 * 24
+    // key, value, options object
+    res.cookie("token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + oneDay),
+        secure: process.env.NODE_ENV === "production"
+    })
+
     res.status(StatusCodes.OK).json({msg: "logged in successfully" })
 }
 
@@ -51,3 +77,5 @@ export const logoutUser = (req, res) => {
 
     res.status(StatusCodes.OK).json({msg: "user logged out successfully"})
 }
+
+

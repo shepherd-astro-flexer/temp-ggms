@@ -30,23 +30,23 @@ export const action = (store, queryClient) => async ({request}) => {
 }
 
 const Login = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const loginGuestUser = async () => {
-    const data = {
-      email: "gilas_gym@test.com",
-      password: "gilas123"
-    }
-    // setup
-    try {
-      await customFetch.post("/auth/login", data);
-      toast.success("Take a test drive.")
-      navigate("/dashboard");
-    } catch (error) {
-      toast.error("Guest user problem. Please try again later.")
-    }
+  // const loginGuestUser = async () => {
+  //   const data = {
+  //     email: "gilas_gym@test.com",
+  //     password: "gilas123"
+  //   }
+  //   // setup
+  //   try {
+  //     await customFetch.post("/auth/login", data);
+  //     toast.success("Take a test drive.")
+  //     navigate("/dashboard");
+  //   } catch (error) {
+  //     toast.error("Guest user problem. Please try again later.")
+  //   }
 
-  }
+  // }
 
   return (
     <section className="flex h-screen justify-center items-center gap-12">
@@ -66,28 +66,12 @@ const Login = () => {
           label="password"
           name="password"
         />
-        <div className="mt4">
-          <SubmitBtn text="login" icon={<FiLogIn/>}/>
-          {/* <GoogleButton /> */}
+        <div className="flex flex-col w-full border-opacity-50 mt-4">
+          <SubmitBtn text="login" icon={<FiLogIn/>} login/>
+          <div className="divider text-sm">Or</div>
+          <GoogleButton />
         </div>
-        
-          {/* <LoginButton /> */}
-          {/* <button className="btn btn-block btn-primary" type="button">login using auth 0</button> */}
-        
-        {/* <button onClick={loginGuestUser} type="button" className="btn btn-secondary btn-block">
-          guest user
-        </button> */}
-        {/* <p className="text-center">
-          Not a user yet?{" "}
-          <Link
-            to="/register"
-            className="ml-2 link link-hover link-primary capitalize"
-          >
-            register
-          </Link>
-        </p> */}
       </Form>
-      {/* <img src={bgLogin} alt="bg-login" className="h-80"/> */}
       <img src={gilasWhite} alt="gilas-img" className="h-96 hidden lg:block"/>
     </section>
   );
