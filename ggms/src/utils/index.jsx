@@ -30,7 +30,8 @@ export const currentDate = () => {
     const day = new Date().getDate();
     const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
-    return `${year}-${month}-${day}`;
+    console.log(`${year}-${month < 10 ? `0${month}` : month }-${day < 10 ? `0${day}` : day}`)
+    return `${year}-${month < 10 ? `0${month}` : month }-${day < 10 ? `0${day}` : day}`;
 }
 
 export const debounce = (func, timeout) => {

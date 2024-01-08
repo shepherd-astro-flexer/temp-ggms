@@ -1,5 +1,5 @@
 import { Outlet, useNavigation, redirect} from "react-router-dom";
-import { Navbar, Header, Loading, BigSidebar, SmallSidebar } from "../components";
+import { Navbar, Header, Loading, BigSidebar, SmallSidebar, TestBigSidebar } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { store } from "../store";
@@ -41,7 +41,7 @@ const HomeLayout = () => {
     
     // console.log(data);
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <BigSidebar/>
       <SmallSidebar/>
       <div className="w-full">

@@ -20,7 +20,7 @@ export const action = (queryClient) => async ({request}) => {
 const Modal = ({id, note, name}) => {
   const navigation = useNavigation();
   const [saveText, setSaveText] = useState("save")
-  console.log(navigation);
+ 
   const isSubmitting = navigation.state === "submitting";
 
   const changeSaveText = () => {
