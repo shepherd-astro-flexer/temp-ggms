@@ -7,7 +7,7 @@ const ClientList = () => {
   const {searchParams, queryFunc} = useLoaderData();
   const {data} = useQuery(queryFunc(searchParams));
   const {totalClients, clients} = data;
-  console.log(clients);
+  
   if (clients.length < 1) {
     return <div className="mt-16">
       <h1 className="text-2xl tracking-wider md:text-3xl lg:text-4xl xl:text-5xl">No clients to display...</h1>

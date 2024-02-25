@@ -31,6 +31,12 @@ export {default as ClientsPagination} from "./ClientsPagination"
 export {default as LoginButton} from "./LoginButton"
 export {default as GoogleButton} from "./GoogleButton"
 export {default as Modal} from "./Modal"
+export {default as EmailInput} from "./EmailInput"
+export {default as PasswordInput} from "./PasswordInput"
+export {default as UsernameInput} from "./UsernameInput"
+
+
+
 
 
 

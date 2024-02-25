@@ -1,5 +1,5 @@
 import { Form, Link, redirect, useNavigate } from "react-router-dom";
-import { FormInput, GoogleButton, LoginButton, SubmitBtn } from "../components";
+import { EmailInput, FormInput, GoogleButton, PasswordInput, SubmitBtn } from "../components";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import gilasWhite from "../assets/images/gilas-white.png";
@@ -49,7 +49,30 @@ const Login = () => {
   // }
 
   return (
-    <section className="flex h-screen justify-center items-center gap-12">
+    <div className="grid min-h-screen place-items-center">
+      <section className="flex place-items-center gap-12">
+        <Form
+          method="POST"
+          className="card w-96 bg-base-100 shadow-xl"
+        >
+          <div className="card-body text-center">
+            <img src={gilasWhite} alt="gilas-img" className="lg:hidden"/>
+            <h4 className="text-3xl font-bold">Login</h4>
+            <EmailInput/>
+            <PasswordInput/>
+            <div className="card-actions w-full mt-6">
+              <SubmitBtn text="login" icon={<FiLogIn className="text-lg"/>} login/>
+            </div>
+          </div>
+        </Form>
+        <img src={gilasWhite} alt="gilas-img" className="h-96 hidden lg:block"/>
+      </section>
+    </div>
+  );
+};
+export default Login;
+
+{/* <section className="flex h-screen justify-center items-center gap-12">
       <Form
         method="POST"
         className="card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4"
@@ -73,7 +96,4 @@ const Login = () => {
         </div>
       </Form>
       <img src={gilasWhite} alt="gilas-img" className="h-96 hidden lg:block"/>
-    </section>
-  );
-};
-export default Login;
+    </section> */}
