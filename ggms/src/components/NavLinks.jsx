@@ -9,6 +9,7 @@ import {MdPersonSearch} from "react-icons/md";
 import {MdAdminPanelSettings} from "react-icons/md"
 import {ImProfile} from "react-icons/im";
 import { FaUserCheck } from "react-icons/fa6";
+import { IoBarChart } from "react-icons/io5";
 import { useLoaderData } from "react-router-dom/dist/umd/react-router-dom.development";
 import { useQuery } from "@tanstack/react-query";
 
@@ -16,6 +17,7 @@ const links = [
   { id: nanoid(6), path: "/dashboard", text: "add client", icon: <MdPersonAddAlt1 className="h-6 w-6"/>},
   { id: nanoid(6), path: "/dashboard/all-clients", text: "all clients", icon: <MdPersonSearch className="h-6 w-6"/>},
   { id: nanoid(6), path: "/dashboard/attendance", text: "attendance", icon: <FaUserCheck className="h-5 w-5"/>},
+  { id: nanoid(6), path: "/dashboard/stats", text: "stats", icon: <IoBarChart className="h-6 w-6"/>},
   { id: nanoid(6), path: "/dashboard/profile", text: "profile", icon: <ImProfile className="h-6 w-6"/>},
   { id: nanoid(6), path: "/dashboard/admin", text: "admin", icon: <MdAdminPanelSettings className="h-6 w-6"/>}
 ];

@@ -6,7 +6,7 @@ import {
   getJob,
   updateJob,
   deleteJob,
-  deleteManyJob,
+  deleteManyJob
 } from "../controllers/jobControllers.js";
 
 import { validationInput, validateParam } from "../middleware/validationMiddleware.js";

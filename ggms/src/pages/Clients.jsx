@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const allClientQuery = (params) => {
   const {search, sort, page, type} = params
   console.log(type);
-  // // ! Fudge :/ it's returning a promise, that's why... WAHHHH!!!
+  // ! Fudge :/ it's returning a promise, that's why... WAHHHH!!!
   return {
     queryKey: ["clients", search || "", sort || "oldest", page || "1", type || "all"],
     queryFn: async () => {

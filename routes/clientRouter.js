@@ -2,7 +2,7 @@
 import express from "express";
 // local imports
 // ! import controllers
-import { createClient, deleteClient, editClient, getClient, searchClient } from "../controllers/clientController.js"; 
+import { createClient, deleteClient, editClient, getClient, searchClient, showSingleStats } from "../controllers/clientController.js"; 
 import {validateClientInput, validateParam } from "../middleware/validationMiddleware.js";
 import { checkTestUser } from "../middleware/authMiddleware.js";
 
@@ -14,10 +14,10 @@ router.route("/add-client")
 router.route("/search-clients")
 .get(searchClient)
 
-// router.route("/attendance")
-// .get()
-
 router.route("/:id")
 .get(validateParam, getClient)
 .patch(checkTestUser, validateParam, validateClientInput, editClient)
 .delete(checkTestUser, validateParam, deleteClient)
+
+router.route("/single-stats/:id")
+.get(showSingleStats)

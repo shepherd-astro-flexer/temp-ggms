@@ -25,6 +25,7 @@ const ClientCard = ({ client }) => {
         {birthdate && <CardInfo Icon={PiCakeFill} property={formatDate(birthdate)}/>}
       </div>
       <Form method="POST" action={`/dashboard/delete-job/${_id}`} className="flex px-6 py-4 gap-x-2">
+        <Link className="btn btn-primary btn-sm capitalize" to={`/dashboard/stats/${_id}`}>stats</Link>
         <Link className="btn btn-primary btn-sm capitalize" to={`/dashboard/edit-client/${_id}`}>edit</Link>
         <button className="btn btn-primary btn-sm capitalize" type="submit">delete</button>
       </Form>

@@ -13,7 +13,9 @@ import {
   AppStats ,
   Profile,
   Attendance,
-  Landing
+  Landing,
+  Stats,
+  SingleStats
 } from "./pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -37,6 +39,7 @@ import { loader as ordersLoader } from "./pages/Orders";
 import { loader as editClientLoader } from "./pages/EditClient";
 import { loader as appStatsLoader } from "./pages/AppStats";
 import { loader as attendanceLoader } from "./pages/Attendance";
+import { loader as singleStatsLoader } from "./pages/SingleStats";
 // import { loader as profileLoader } from "./pages/Profile";
 
 // actions
@@ -143,6 +146,17 @@ const router = createBrowserRouter([
       {
         path: "add-attendee",
         action: addAttendeeAction(queryClient)
+      },
+      {
+        path: "stats",
+        element: <Stats />,
+        errorElement: <ErrorElement/>
+      },
+      {
+        path: "stats/:id",
+        element: <SingleStats />,
+        errorElement: <ErrorElement/>,
+        loader: singleStatsLoader(queryClient)
       }
     ],
   },
